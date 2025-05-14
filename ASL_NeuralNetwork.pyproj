@@ -32,34 +32,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Models\Model1.keras" />
-    <Content Include="Models\Model10.keras" />
-    <Content Include="Models\Model11.keras" />
-    <Content Include="Models\Model12.keras" />
-    <Content Include="Models\Model13.keras" />
-    <Content Include="Models\Model14.keras" />
-    <Content Include="Models\Model15.keras" />
-    <Content Include="Models\Model16.keras" />
-    <Content Include="Models\Model17.keras" />
-    <Content Include="Models\Model18.keras" />
-    <Content Include="Models\Model19.keras" />
     <Content Include="Models\Model2.keras" />
-    <Content Include="Models\Model20.keras" />
-    <Content Include="Models\Model21.keras" />
-    <Content Include="Models\Model22.keras" />
-    <Content Include="Models\Model23.keras" />
-    <Content Include="Models\Model24.keras" />
-    <Content Include="Models\Model25.keras" />
-    <Content Include="Models\Model26.keras" />
-    <Content Include="Models\Model27.keras" />
     <Content Include="Models\Model28.keras" />
-    <Content Include="Models\Model29.keras" />
     <Content Include="Models\Model3.keras" />
     <Content Include="Models\Model4.keras" />
     <Content Include="Models\Model5.keras" />
-    <Content Include="Models\Model6.keras" />
-    <Content Include="Models\Model7.keras" />
-    <Content Include="Models\Model8.keras" />
-    <Content Include="Models\Model9.keras" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
