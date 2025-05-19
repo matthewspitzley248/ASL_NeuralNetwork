@@ -7,10 +7,15 @@ from random import seed
 from random import random
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import shutil
+import numpy as np
 
 #This class handles all the importation, setup, seperation, and transformation of the data
 #for the models to use.
 class Data:
+    """
+    Handles preperation of the dataset where it splits the data into training and testing 
+    and creates image generators with the ability to augment them.
+    """
 
     #const values
     DATASET_DIR = "asl_dataset/new_asl_dataset/train/"
@@ -23,20 +28,37 @@ class Data:
     ]
 
 
-    def __init__(self, batch_size, img_shape, rotation=0, zoom_range=0, shift_range=0, val_ratio=0.2, seperate_data=False):
+    def __init__(self, batch_size, img_shape, rotation=0, zoom_range=[1,1], shift_range=0, val_ratio=0.2, seperate_data=False, random_seed=42):
         """
-        
+        sets up variables with an option to seperate the images into test and train datasets at different ratios.
+        Creates image generators for the test and train datasets
+        Gets the label info and creates the label to class dictionary from the data generator
+
+        Parameters:
+        -batch_size: size of batches for image generator
+        -img_shape: the shape to scale the images to
+        -seperate_data: set to True to seperate data to train and test datasets
+        -val_ratio: ratio for the test and train datasets
+        -random_seed: seed value for repeatable results when seperating the data
+        -rotation, zoom_range, shift_range: Augment parameters for training image generator
         """
         self.batch_size = batch_size
         self.img_shape = img_shape
         self.val_ratio = val_ratio
+        self.random_seed = random_seed
 
         #if data is wanted to be seperated
         if seperate_data:
             self.seperate_Images(val_ratio)
 
+        #generate a test and train image generator
         self.train_image_gen = self.image_Generator(subset='train', batch_size=batch_size, new_img_shape=img_shape, rotation=rotation, zoom_range=zoom_range, shift_range=shift_range)
         self.test_image_gen = self.image_Generator(subset='test', batch_size=batch_size, new_img_shape=img_shape, rotation=rotation, zoom_range=zoom_range, shift_range=shift_range)
+
+        #gets the dictionary of labels
+        self.label_info = self.test_image_gen.class_indices
+        #flips the dictionary of labels so predictions can get the label of what is predicted.
+        self.label_to_class = {v: k for k, v in self.label_info.items()}
 
 
     #Copies the data from the dataset into the Data folder with it seperated into test and train dataset.
@@ -57,7 +79,7 @@ class Data:
                 os.makedirs(newdir, exist_ok=True)
 
         # seed random number generator
-        seed()
+        seed(self.random_seed)
 
         # copy training dataset images into subdirectories
         for src_directory in self.LABEL_DIRS:
@@ -74,7 +96,7 @@ class Data:
 
 
     
-    def image_Generator(self, subset, batch_size, new_img_shape, rotation=0, zoom_range=1, shift_range=0):
+    def image_Generator(self, subset, batch_size, new_img_shape, rotation=0, zoom_range=[1,1], shift_range=0):
         """
         Preprocesses the test and train data and augments it using the keras image data generator.
 
@@ -115,5 +137,42 @@ class Data:
         # -- decided by the ImageDataGenerator class
         return image_gen
 
+
+    def array_to_labels(self, array):
+        """
+        takes the array and runs it against the labels for the data and turns it into a human readable format
+
+        Parameter
+        -array: the array of labels for the images from the generator
+        """
+        labels = []
+        for onehot_array in array:
+            idx = np.where(onehot_array == 1)[0]
+            labels.append([self.label_to_class[i] for i in idx][0])
+        return labels
+
+
+    def get_next_labeled_batch(self, subset='test'):
+        """
+        gets the next batch of images from either the test or train generator as specified from the subset
+        and converts the labels to be readable.
+
+        Parameters:
+        -subset: test or train
+
+        Returns:
+        -the images as an array
+        -the labels in a readable format as an array
+        """
+
+        #get a list of images and labels
+        if subset == 'train':
+            images, labels = next(self.train_image_gen)
+        else:
+            images, labels = next(self.test_image_gen)
+        
+        img_labels = self.array_to_labels(labels)
+
+        return images, img_labels
 
 

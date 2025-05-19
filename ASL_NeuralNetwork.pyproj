@@ -4,13 +4,14 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>085f7bef-4c33-4289-a244-357dc1ecd429</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>ASL_NeuralNetwork.py</StartupFile>
+    <StartupFile>Main.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>ASL_NeuralNetwork</Name>
     <RootNamespace>ASL_NeuralNetwork</RootNamespace>
+    <InterpreterId>MSBuild|env1|$(MSBuildProjectFullPath)</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -28,11 +29,56 @@
     <Compile Include="Model.py" />
     <Compile Include="ModelOld.py" />
     <Compile Include="ModelTest.py" />
+    <Compile Include="Plot.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="asl_dataset\" />
     <Folder Include="asl_dataset\Data\" />
+    <Folder Include="asl_dataset\Data\test\" />
+    <Folder Include="asl_dataset\Data\test\a\" />
+    <Folder Include="asl_dataset\Data\test\Blank\" />
+    <Folder Include="asl_dataset\Data\test\b\" />
+    <Folder Include="asl_dataset\Data\test\c\" />
+    <Folder Include="asl_dataset\Data\test\d\" />
+    <Folder Include="asl_dataset\Data\test\e\" />
+    <Folder Include="asl_dataset\Data\test\f\" />
+    <Folder Include="asl_dataset\Data\test\g\" />
+    <Folder Include="asl_dataset\Data\test\h\" />
+    <Folder Include="asl_dataset\Data\test\i\" />
+    <Folder Include="asl_dataset\Data\test\j\" />
+    <Folder Include="asl_dataset\Data\test\k\" />
+    <Folder Include="asl_dataset\Data\test\l\" />
+    <Folder Include="asl_dataset\Data\test\m\" />
+    <Folder Include="asl_dataset\Data\test\n\" />
+    <Folder Include="asl_dataset\Data\test\o\" />
+    <Folder Include="asl_dataset\Data\test\p\" />
+    <Folder Include="asl_dataset\Data\test\q\" />
+    <Folder Include="asl_dataset\Data\test\r\" />
+    <Folder Include="asl_dataset\Data\test\s\" />
+    <Folder Include="asl_dataset\Data\test\t\" />
+    <Folder Include="asl_dataset\Data\test\u\" />
+    <Folder Include="asl_dataset\Data\test\v\" />
+    <Folder Include="asl_dataset\Data\test\w\" />
+    <Folder Include="asl_dataset\Data\test\x\" />
+    <Folder Include="asl_dataset\Data\test\y\" />
+    <Folder Include="asl_dataset\Data\test\z\" />
     <Folder Include="asl_dataset\Data\train\" />
+    <Folder Include="asl_dataset\Data\train\a\" />
+    <Folder Include="asl_dataset\Data\train\Blank\" />
+    <Folder Include="asl_dataset\Data\train\b\" />
+    <Folder Include="asl_dataset\Data\train\c\" />
+    <Folder Include="asl_dataset\Data\train\d\" />
+    <Folder Include="asl_dataset\Data\train\e\" />
+    <Folder Include="asl_dataset\Data\train\f\" />
+    <Folder Include="asl_dataset\Data\train\g\" />
+    <Folder Include="asl_dataset\Data\train\h\" />
+    <Folder Include="asl_dataset\Data\train\i\" />
+    <Folder Include="asl_dataset\Data\train\j\" />
+    <Folder Include="asl_dataset\Data\train\k\" />
+    <Folder Include="asl_dataset\Data\train\l\" />
+    <Folder Include="asl_dataset\Data\train\m\" />
+    <Folder Include="asl_dataset\Data\train\n\" />
+    <Folder Include="asl_dataset\Data\train\o\" />
     <Folder Include="asl_dataset\Data\train\P\" />
     <Folder Include="asl_dataset\Data\train\Q\" />
     <Folder Include="asl_dataset\Data\train\R\" />
@@ -108,9 +154,22 @@
     <Content Include="Saved_Models\Model1.keras" />
     <Content Include="Saved_Models\Model2.keras" />
     <Content Include="Saved_Models\Model28.keras" />
+    <Content Include="Saved_Models\Model29.keras" />
     <Content Include="Saved_Models\Model3.keras" />
+    <Content Include="Saved_Models\Model30.keras" />
     <Content Include="Saved_Models\Model4.keras" />
     <Content Include="Saved_Models\Model5.keras" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="env1\">
+      <Id>env1</Id>
+      <Version>3.9</Version>
+      <Description>env1 (Python 3.9 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
