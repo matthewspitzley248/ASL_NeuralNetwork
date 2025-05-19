@@ -11,6 +11,10 @@ class Plot:
     def __init__(self, model, data):
         """
         Saves the data and model object 
+
+        Parameters:
+        -model: model object
+        -data: data object that the model was run on
         """
         self.model = model
         self.data = data
@@ -47,8 +51,16 @@ class Plot:
         ax[1].set_ylabel("Loss")
         plt.show()
 
-    def plot_image(self, i, predictions_array, predicted_label, true_label, img):
-        true_label, img, predicted_label = true_label[i], img[i], predicted_label[i]
+    def plot_image(self, predictions_array, predicted_label, true_label, img):
+        """
+        Shows an image that it was predicted on and if it is right or not
+
+        Parameter:
+        -predictions_array: the weights array on the predicted value
+        -predicted_label: the predicted value
+        -true_label: the actual value for the image
+        -img: image to plot
+        """
         plt.grid(False)
         plt.xticks([])
         plt.yticks([])
@@ -64,10 +76,16 @@ class Plot:
                     true_label),
                     color=color)
 
-    def plot_value_array(self, i, labels, predictions_array, true_label):
-        true_label = true_label[i]
+    def plot_value_array(self, predictions_array, true_label):
+        """
+        Displays a bar graph on the weights of what it thought it was.
+
+        Parameters:
+        -predictions_array: the weights array on the predicted value
+        -true_label: actual value for the image
+        """
         plt.grid(False)
-        plt.xticks(range(len(predictions_array)), labels)
+        plt.xticks(range(len(predictions_array)), self.data.label_info)
         plt.yticks([])
         thisplot = plt.bar(range(len(predictions_array)), predictions_array, color="#777777")
         plt.ylim([0, 1])
@@ -76,30 +94,34 @@ class Plot:
         #thisplot[true_label].set_color('blue')
 
     def gen_image_array(self, predictions, img_prediction, img_labels, images):
-        # Plot the first X test images, their predicted labels, and the true labels.
-        # Color correct predictions in blue and incorrect predictions in red.
+        """
+        Creates a 3x3 of images with their predicted labels, and the true labels.
+        Color correct predictions in blue and incorrect predictions in red.
+        Shows a bar graph next to it with the weight of what it thought it was.
+
+        Parameters:
+        -predictions: array of predictions of the images
+        -img_prediction: array of readable values of the predictions
+        -img_labels: array of readable values of the actual value
+        -images: array of images that were run through the model
+        """
         num_rows = 3
         num_cols = 3
         num_images = num_rows * num_cols
         plt.figure(figsize=(2 * 2 * num_cols, 2 * num_rows))
         for i in range(num_images):
             plt.subplot(num_rows, 2 * num_cols, 2 * i + 1)
-            self.plot_image(i, predictions[i], img_prediction, img_labels, images)
+            self.plot_image(predictions[i], img_prediction[i], img_labels[i], images[i])
             plt.subplot(num_rows, 2 * num_cols, 2 * i + 2)
-            self.plot_value_array(i, self.data.label_info, predictions[i], img_labels)
+            self.plot_value_array(predictions[i], img_labels[i])
         plt.tight_layout()
 
 
     def test_model(self):
         """
-
+        Runs the model through some tests to show how well it does and how it is performing.
         """
-
         images, img_labels = self.data.get_next_labeled_batch()
-
-        #print(img_labels)
-
-        #Model.show_images(images, img_labels, labelInfo, 25)
 
         predictions = self.model.model.predict(images)
         base_pred = np.argmax(predictions, axis=1)
@@ -114,13 +136,13 @@ class Plot:
         #print('Confusion Matrix: \n', confusion_matrix(img_prediction, img_labels))
 
         
+        #Creates a heatmap on the tests.
         plt.figure(figsize=(15, 15))
         sns.heatmap(confusion_matrix(img_labels, img_prediction), annot=True, xticklabels=self.data.label_info, yticklabels=self.data.label_info)
         plt.xlabel('Predicted Label')
         plt.ylabel('True Label')
         #plt.show()
 
+        #Shows a grid of pictures with what was predicted and how sure it is as a bar graph.
         self.gen_image_array(predictions, img_prediction, img_labels, images)
-        fig = plt.gcf()
-        #fig.show()
         plt.show()

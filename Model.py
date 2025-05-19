@@ -20,6 +20,10 @@ class Model:
     def __init__(self, data, model_name=None):
         """
         creates or loads a model and saves the data object
+
+        Parameters:
+        -data: data object to run the model on
+        -model_name: name of model to load, leave blank if it will be a new model
         """
 
         self.data = data

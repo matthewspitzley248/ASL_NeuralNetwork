@@ -65,6 +65,9 @@ class Data:
     def seperate_Images(self, val_ratio):
         """
         seperates the DATASET_DIR contents into a train and test folder
+
+        Parameter:
+        -val_ratio: ratio of test imagges to training images
         """
 
         #Remove the DATASET_HOME directory if it exists
@@ -142,7 +145,7 @@ class Data:
         """
         takes the array and runs it against the labels for the data and turns it into a human readable format
 
-        Parameter
+        Parameter:
         -array: the array of labels for the images from the generator
         """
         labels = []
@@ -157,7 +160,7 @@ class Data:
         gets the next batch of images from either the test or train generator as specified from the subset
         and converts the labels to be readable.
 
-        Parameters:
+        Parameter:
         -subset: test or train
 
         Returns:
