@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from pandas import qcut
 import seaborn as sns
 import numpy as np
 from sklearn.metrics import classification_report, confusion_matrix
@@ -76,7 +77,7 @@ class Plot:
                     true_label),
                     color=color)
 
-    def plot_value_array(self, predictions_array, true_label):
+    def plot_value_array(self, predictions_array, true_label=None):
         """
         Displays a bar graph on the weights of what it thought it was.
 
@@ -91,7 +92,8 @@ class Plot:
         plt.ylim([0, 1])
         predicted_label = np.argmax(predictions_array)
         thisplot[predicted_label].set_color('red')
-        #thisplot[true_label].set_color('blue')
+        if true_label is not None:
+            thisplot[self.data.label_info[true_label]].set_color('blue')
 
     def gen_image_array(self, predictions, img_prediction, img_labels, images):
         """
