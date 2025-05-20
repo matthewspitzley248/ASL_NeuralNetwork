@@ -1,0 +1,10 @@
+numpy
+pandas
+matplotlib
+scikit-image
+tensorflow==2.19
+scikit-learn
+seaborn
+opencv-python
+screeninfo
+Pillow

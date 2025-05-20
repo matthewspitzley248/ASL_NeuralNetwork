@@ -120,7 +120,7 @@ class Data:
                             rescale=1.0 / 255.0,  # scales image pixel values between 0 and 1
                             rotation_range=rotation,  # randomly rotate images in the range (degrees, 0 to 180)
                             zoom_range=zoom_range,  # Randomly zoom image
-                            horizontal_flip=True,
+                            horizontal_flip=False,
                             width_shift_range=shift_range,   # randomly shift images horizontally (fraction of total width)
                             height_shift_range=shift_range  # randomly shift images vertically (fraction of total height)
             )

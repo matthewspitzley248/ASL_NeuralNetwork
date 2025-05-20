@@ -22,13 +22,10 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ASL_NeuralNetwork.py" />
     <Compile Include="Camera.py" />
     <Compile Include="Data.py" />
     <Compile Include="Main.py" />
     <Compile Include="Model.py" />
-    <Compile Include="ModelOld.py" />
-    <Compile Include="ModelTest.py" />
     <Compile Include="Plot.py" />
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +148,8 @@
     <Folder Include="Saved_Models\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".gitignore" />
+    <Content Include="requirements.txt" />
     <Content Include="Saved_Models\Model1.keras" />
     <Content Include="Saved_Models\Model2.keras" />
     <Content Include="Saved_Models\Model28.keras" />

@@ -361,4 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/Models/Model29.keras
+
+/env1/*
+/asl_dataset/*
